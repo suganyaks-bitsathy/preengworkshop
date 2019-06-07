@@ -16,8 +16,7 @@ and open the template in the editor.
             $data = stripslashes($data);
             $data = htmlspecialchars($data);
             return $data;
-          }
-          
+          }   
     ?>
         
         <?php
@@ -28,20 +27,19 @@ and open the template in the editor.
            $username = mysqli_real_escape_string($con,$username);
            $password= test_input($_REQUEST['password']);
            $password = mysqli_real_escape_string($con,$password);
-           $query = "SELECT * FROM `users` WHERE username='$username'and password='".md5($password)."'";
-           $result = mysqli_query($con,$query) or die(mysql_error());
+           $query = "SELECT * FROM `users` WHERE username='$username' and password='$password'";
+           $result = mysqli_query($con,$query);
             $rows = mysqli_num_rows($result);
             if($rows==1){
-            // Redirect user to index.php
-	    header("Location: index.php");
-         }else{
-             echo "<h3>Username/password is incorrect.</h3>
-<br/>Click here to <a href='login.php'>Login</a></div>";
+	   header("Location: home.php");
+         }
+         else{
+             echo "<h3>Username/password is incorrect.</h3><br/>Click here to <a href='login.php'>Login</a>";
 	}
     }else{
          
 ?>
-        <form action="home.php" method="POST">
+        <form action="" method="POST">
             
             Username: <input type="text" name="username" value="" /><br/>
             Password: <input type="password" name="password" value="" />
